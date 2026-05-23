@@ -101,12 +101,11 @@ Default model when using Groq: `qwen/qwen3-32b`
 
 ## 4. Database
 
-```bash
-take dump from infinitheism_dev db 
-and the run the script file
-```
+Restore the database from the `infinitheism_dev` dump, then run the script file
+ script file:
+session_tables.sql
 
-The tables are auto-created on first startup via `init_db()`.
+The application tables are auto-created on first startup via `init_db()`.
 
 ---
 
