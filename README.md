@@ -49,23 +49,21 @@ GOOGLE_API_KEY=AIzaSy...       # https://aistudio.google.com/app/apikey
 GROQ_API_KEY=gsk_...           # https://console.groq.com (free, recommended for dev)
 
 # NestJS backend URL
-NESTJS_BASE_URL=http://localhost:3000
-
-# JWT secret — change before going to production
-JWT_SECRET_KEY=your-secret-here
+NESTJS_BASE_URL=https://api.portal.dev.divami.com
 ```
 
 > At least one AI provider key (`GOOGLE_API_KEY` or `GROQ_API_KEY`) is required. Everything else has a working default.
 
-### 4. Start the database
+### 4. Set up the database
 
-Make sure PostgreSQL is running and the database exists:
+Restore from the `infinitheism_dev` dump, then run the session tables script:
 
 ```bash
-createdb ai_platform
+pg_restore -d ai_platform infinitheism_dev.dump
+psql ai_platform -f session_tables.sql
 ```
 
-Tables are created automatically on first startup.
+Application tables are auto-created on first startup via `init_db()`.
 
 ### 5. Start the API server
 
@@ -78,7 +76,7 @@ make dev
 
 ```bash
 make dev-ui
-# UI starts at http://localhost:3001
+# UI starts at http://localhost:4002
 ```
 
 ---
@@ -106,9 +104,8 @@ make dev-ui
 | Variable | Required | Default | Description |
 |---|---|---|---|
 | `GOOGLE_API_KEY` | One of these | — | Google Gemini API key |
-| `GROQ_API_KEY` | One of these | — | Groq API key (free tier, fast — recommended for dev) |
-| `ANTHROPIC_API_KEY` | No | — | Anthropic Claude key |
-| `OPENAI_API_KEY` | No | — | OpenAI key |
+| `GROQ_API_KEY` | One of these | — | Groq API key (free tier — recommended for dev) |
+| `ANTHROPIC_API_KEY` | One of these | — | Anthropic Claude key |
 | `DEFAULT_MODEL` | No | `gemini-2.5-flash` | Model when `GOOGLE_API_KEY` is set |
 | `GROQ_MODEL` | No | `qwen/qwen3-32b` | Model when `GROQ_API_KEY` is set |
 
@@ -116,13 +113,11 @@ make dev-ui
 
 | Variable | Required | Default | Description |
 |---|---|---|---|
-| `NESTJS_BASE_URL` | No | `http://localhost:3000` | Downstream NestJS service URL |
+| `NESTJS_BASE_URL` | No | `https://api.portal.dev.divami.com` | Downstream NestJS service URL |
 | `NESTJS_TIMEOUT` | No | `30.0` | Request timeout in seconds |
 | `NESTJS_MAX_RETRIES` | No | `3` | Retry attempts on transient failures |
 | `NESTJS_CLIENT_ID` | No | — | Service-to-service auth client ID |
 | `NESTJS_CLIENT_SECRET` | No | — | Service-to-service auth secret |
-| `JWT_SECRET_KEY` | No | `change-me-in-production` | JWT signing key |
-| `JWT_EXPIRE_MINUTES` | No | `60` | JWT token TTL |
 
 ### Observability
 
@@ -270,7 +265,7 @@ make dev   # starts API at http://localhost:8000
 ```bash
 make install     # Install all dependencies
 make dev         # Run API server with hot-reload (port 8000)
-make dev-ui      # Run React UI (port 3001)
+make dev-ui      # Run React UI (port 4002)
 make test        # Run all tests
 make lint        # Lint with Ruff
 make format      # Auto-format with Ruff
@@ -315,7 +310,7 @@ ai-platform/
 │   │       ├── routes.py              # Root router (health + v1)
 │   │       └── v1/
 │   │           └── routes.py          # Aggregates all v1 controllers
-│   └── ui/                            # React + Vite frontend (port 3001)
+│   └── ui/                            # React + Vite frontend (port 4002)
 │
 ├── packages/
 │   ├── agents/
@@ -436,9 +431,8 @@ lsof -i :8000
 # Kill it (replace 8000 with whichever port)
 lsof -ti:8000 | xargs kill -9
 
-# Or kill the UI port (default 5173 / 3001)
-lsof -ti:5173 | xargs kill -9
-lsof -ti:3001 | xargs kill -9
+# Or kill the UI port
+lsof -ti:4002 | xargs kill -9
 ```
 
 On Windows:
