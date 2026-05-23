@@ -103,7 +103,7 @@ async def _do_publish(session: SessionState, stage: AgentStage) -> AgentChatResp
 async def handle_publish(session: SessionState, message: str) -> AgentChatResponse:
     lower = message.lower().strip()
 
-    if lower in _DRAFT_WORDS:
+    if lower in _DRAFT_WORDS or any(w in lower for w in _DRAFT_WORDS):
         return AgentChatResponse(
             session_id=session.session_id,
             reply=f"Saved as DRAFT (ID: {session.program_id}). Come back anytime to publish.",

@@ -173,7 +173,11 @@ export function ProgramPreviewCard({ dto }: ProgramPreviewCardProps) {
             <div className={styles.field}>
               <span className={styles.label}>Seats</span>
               <span className={styles.value}>
-                {dto.limited_seats ? `${dto.total_seats ?? "—"} (limited)` : "Unlimited"}
+                {dto.limited_seats
+                  ? dto.total_seats != null
+                    ? String(dto.total_seats)
+                    : "Limited (count not set)"
+                  : "Unlimited"}
               </span>
             </div>
             <div className={styles.field}>

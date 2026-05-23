@@ -30,7 +30,14 @@ _EDIT_WORDS = frozenset({"edit", "change", "modify", "update", "no", "nope"})
 
 
 def _is_confirm(message: str) -> bool:
-    return message.lower().strip() in _CONFIRM_WORDS
+    lower = message.lower().strip()
+    if lower in _CONFIRM_WORDS:
+        return True
+    return any(
+        (re.search(r'\b' + re.escape(w) + r'\b', lower) is not None) if ' ' not in w
+        else (w in lower)
+        for w in _CONFIRM_WORDS
+    )
 
 
 def _is_edit(message: str) -> bool:

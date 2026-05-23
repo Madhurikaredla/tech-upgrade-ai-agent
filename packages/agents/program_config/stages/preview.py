@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import logfire
 
 from packages.agents.program_config.api_client import create_program, friendly_api_error
@@ -19,7 +20,14 @@ _EDIT_WORDS = frozenset({"edit", "change", "modify", "update", "no", "nope"})
 
 
 def is_confirm(message: str) -> bool:
-    return message.lower().strip() in _CONFIRM_WORDS
+    lower = message.lower().strip()
+    if lower in _CONFIRM_WORDS:
+        return True
+    return any(
+        (re.search(r'\b' + re.escape(w) + r'\b', lower) is not None) if ' ' not in w
+        else (w in lower)
+        for w in _CONFIRM_WORDS
+    )
 
 
 def is_edit(message: str) -> bool:
@@ -73,7 +81,7 @@ def format_program_preview(dto: CreateProgramDto) -> str:
         f"│  Ends               : {_fmt_date(dto.ends_at):<25}│",
         f"│  Reg. Opens         : {_fmt_date(dto.registration_starts_at):<25}│",
         f"│  Reg. Closes        : {_fmt_date(dto.registration_ends_at):<25}│",
-        f"│  Max Seats          : {(str(dto.total_seats) if dto.limited_seats and dto.total_seats else 'Unlimited'):<25}│",
+        f"│  Max Seats          : {(str(dto.total_seats) if dto.limited_seats and dto.total_seats else ('Limited (count not set)' if dto.limited_seats else 'Unlimited')):<25}│",
         f"│  Waitlist           : {'Yes' if dto.waitlist_applicable else 'No':<25}│",
         f"│  Requires Approval  : {'Yes' if dto.requires_approval else 'No':<25}│",
     ]
