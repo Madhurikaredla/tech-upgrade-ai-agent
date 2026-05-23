@@ -1,0 +1,102 @@
+@keyframes ch-qs-enter {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.quickStart {
+  animation: ch-qs-enter 0.4s ease-out 0.1s both;
+}
+
+.card {
+  background: linear-gradient(135deg, #F5F3FF, #F0EEFF);
+  border: 1px solid #E4E0F4;
+  border-radius: 18px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.cardTitle {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #4A4770;
+}
+
+.stepsRow {
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+}
+
+.stepItem {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  position: relative;
+}
+
+.stepIconCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.stepNumber {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #7068B8;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.stepConnectorLine {
+  width: 2px;
+  height: 100%;
+  position: absolute;
+  left: 13px;
+  top: 28px;
+  background: #D8D4F0;
+  z-index: 0;
+}
+
+.stepContent {
+  padding-bottom: 1rem;
+}
+
+.stepTitle {
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: #2D2A50;
+  margin-bottom: 2px;
+}
+
+.stepDesc {
+  font-size: 0.8rem;
+  color: #7A788E;
+  line-height: 1.5;
+}
+
+.voiceTip {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #E4E0F4;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #7068B8;
+}

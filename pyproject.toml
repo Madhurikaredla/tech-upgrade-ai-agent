@@ -1,0 +1,56 @@
+[project]
+name = "ai-platform"
+version = "0.1.0"
+description = "Production-grade AI platform with PydanticAI + FastAPI + Logfire"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic-ai>=0.0.14",
+    "pydantic-settings>=2.3",
+    "fastapi>=0.111",
+    "uvicorn[standard]>=0.29",
+    "logfire[fastapi]>=0.46",
+    "httpx>=0.27",
+    "tenacity>=8.3",
+    "python-jose[cryptography]>=3.3",
+    "python-multipart>=0.0.9",
+    "sqlalchemy>=2.0",
+    "asyncpg>=0.29",
+    "aiosqlite>=0.20",
+    "passlib[bcrypt]>=1.7",
+    "greenlet>=3.5.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["packages", "apps"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.23",
+    "httpx>=0.27",
+    "pytest-mock>=3.14",
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true

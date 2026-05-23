@@ -1,0 +1,215 @@
+.card {
+  background: #fff;
+  border: 1px solid #EDE9FF;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(112, 104, 184, 0.10);
+  overflow: hidden;
+  max-width: 640px;
+  width: 100%;
+  animation: pc-fade-in 0.35s ease-out both;
+}
+
+@keyframes pc-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Header ──────────────────────────────────── */
+.cardHeader {
+  background: linear-gradient(135deg, #7068B8 0%, #8578C4 100%);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cardHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+}
+
+.cardTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+.cardCode {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 2px 8px;
+  letter-spacing: 0.04em;
+}
+
+.cardHeaderBadges {
+  display: flex;
+  gap: 0.375rem;
+  flex-wrap: wrap;
+}
+
+/* ── Badges ──────────────────────────────────── */
+.badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.badge_type {
+  background: rgba(255,255,255,0.22);
+  color: #fff;
+}
+
+.badge_mode {
+  background: rgba(255,255,255,0.13);
+  color: rgba(255,255,255,0.88);
+}
+
+.badge_status {
+  background: #F5F0A8;
+  color: #7A6A10;
+}
+
+/* ── Sections ────────────────────────────────── */
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.section {
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid #F3F0FF;
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.sectionTitle {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #9B94CC;
+  margin: 0 0 0.625rem 0;
+}
+
+/* ── Grid ────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fieldFull {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.label {
+  font-size: 0.6875rem;
+  color: #B0ACCC;
+  font-weight: 500;
+}
+
+.value {
+  font-size: 0.875rem;
+  color: #2D2A50;
+  font-weight: 500;
+}
+
+.fee {
+  color: #7068B8;
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+
+.link {
+  font-size: 0.8125rem;
+  color: #7068B8;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ── Table ───────────────────────────────────── */
+.tableWrap {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid #EDE9FF;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  color: #2D2A50;
+}
+
+.table th {
+  background: #F7F5FF;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #9B94CC;
+  border-bottom: 1px solid #EDE9FF;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 0.5625rem 0.75rem;
+  border-bottom: 1px solid #F3F0FF;
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:hover td {
+  background: #FDFCFF;
+}
+
+/* ── Footer ──────────────────────────────────── */
+.cardFooter {
+  background: #F9F7FF;
+  border-top: 1px solid #EDE9FF;
+  padding: 0.625rem 1.25rem;
+  text-align: center;
+}
+
+.footerHint {
+  font-size: 0.8125rem;
+  color: #9B94CC;
+}
+
+.footerHint strong {
+  color: #7068B8;
+  font-weight: 600;
+}

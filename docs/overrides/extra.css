@@ -1,0 +1,9 @@
+:root  > * {
+  --md-primary-fg-color--dark:        #ff1300;
+  --md-primary-fg-color--light: #ECB7B7;
+  --md-primary-fg-color:  #c93d2e;
+}
+
+.md-grid {
+  max-width: 95%;
+}

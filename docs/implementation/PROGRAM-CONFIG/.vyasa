@@ -1,0 +1,2 @@
+order = ["prd.md", "trd.md", "tasks.md"]
+sort  = "name_asc"
