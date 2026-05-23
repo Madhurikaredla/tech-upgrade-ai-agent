@@ -269,6 +269,7 @@ async def handle_form_preview(session: SessionState, message: str) -> AgentChatR
                     reply=f"Could not attach the registration form — {friendly_api_error(exc)} Please try again.",
                     stage=session.stage,
                     success=False,
+                    requires_confirmation=True,
                 )
         else:
             # Admin edited questions (template_id cleared on first edit) — upload modified set
@@ -281,6 +282,7 @@ async def handle_form_preview(session: SessionState, message: str) -> AgentChatR
                     reply=f"Could not attach the registration form — {friendly_api_error(exc)} Please try again.",
                     stage=session.stage,
                     success=False,
+                    requires_confirmation=True,
                 )
         session.stage = AgentStage.FORM_ATTACHED
         return handle_publish_prompt(session)
@@ -313,15 +315,17 @@ async def handle_form_preview(session: SessionState, message: str) -> AgentChatR
             return AgentChatResponse(
                 session_id=session.session_id,
                 reply=(
-                    "I couldn't apply that edit. Try:\n"
-                    "  • Paste the question text and end with 'remove these'\n"
+                    "I couldn't find a matching question. Use the exact question text or number from the list below.\n\n"
+                    "Examples:\n"
                     "  • 'Remove questions 4, 5, 6'\n"
-                    "  • 'Remove <keyword>'\n"
-                    "  • 'Add a question: <text> (text, required)'\n"
-                    "  • 'Make <question keyword> optional'"
+                    "  • 'Remove Date of Birth'\n"
+                    "  • 'Make Mobile Number optional'\n"
+                    "  • 'Add a question: preferred roommate (text, optional)'\n\n"
+                    + format_form_preview(session.template_questions)
                 ),
                 stage=session.stage,
                 form_preview=session.template_questions,
+                requires_confirmation=True,
             )
         if session.template_id is not None:
             session.template_id = None
